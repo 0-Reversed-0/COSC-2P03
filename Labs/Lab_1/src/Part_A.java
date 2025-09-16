@@ -1,9 +1,14 @@
+import java.util.Scanner;
+
 public class Part_A
 {
 
     Part_A()
     {
-        System.out.println(fibonacci(8));
+        Scanner input = new Scanner(System.in);
+        System.out.print("Choose an position of a value in the fibonacci sequence: ");
+        int position = input.nextInt();
+        System.out.println("The value at that position is: " + fibonacci(position));
     }
 
     int fibonacci(int n)
