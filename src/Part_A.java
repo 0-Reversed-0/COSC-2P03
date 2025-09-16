@@ -7,10 +7,8 @@ public class Part_A
     Part_A()
     {
         System.out.print("Choose an index for a number in the Fibonacci sequence: ");
-
         int in = input.nextInt();
         int value = fibonacci(in);
-
         System.out.println("The fibonacci value at index " + in + " is: " + value);
     }
 
