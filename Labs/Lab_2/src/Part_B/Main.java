@@ -4,12 +4,14 @@ import Part_A.*;
 
 import java.util.Scanner;
 
-public class Main {
+public class Main
+{
 
-    public Main() {
+    public Main()
+    {
         Scanner sc = new Scanner(System.in);
 
-        if(bracketCheck(sc.nextLine()))
+        if (bracketCheck(sc.nextLine()))
         {
             System.out.println("All the brackets are closed");
         } else
@@ -18,50 +20,104 @@ public class Main {
         }
     }
 
-    boolean bracketCheck(String input) {
+    /**
+     * A method that checks if every bracket is closed
+     * @param input a string of bracket
+     * @return a true if all the brackets are closed and a false if the brackets are false
+     */
+
+    boolean bracketCheck(String input)
+    {
 
         Stack<Character> leftBracket = new LinkedStack<>();
         Stack<Character> rightBracket = new LinkedStack<>();
 
         char[] ch = input.toCharArray();
 
-        for (char c : ch) {
-            if (check(c) == 0) {
-                leftBracket.push(c);
-            } else if (check(c) == 1) {
-                if (!leftBracket.isEmpty()) {
-                    leftBracket.pop();
+        for (int i = 0; i < ch.length; i++)
+        {
+            if (check(ch[i]) == 0)
+            {
+                leftBracket.push(ch[i]);
+                for (int j = i; j < ch.length; j++)
+                {
+                    if (ch[j] == opposite(leftBracket.peek()))
+                    {
+                        leftBracket.pop();
+                        break;
+                    }
                 }
             }
         }
 
-        for (int i = ch.length - 1; i >= 0; i--) {
-
-            char c = ch[i];
-
-            if (check(c) == 1) {
-                rightBracket.push(c);
-            } else if (check(c) == 0) {
-                if (!rightBracket.isEmpty()) {
-                    rightBracket.pop();
+        for (int i = ch.length-1; i >= 0; i--)
+        {
+            if (check(ch[i]) == 1)
+            {
+                rightBracket.push(ch[i]);
+                for (int j = ch.length - i - 1; j >= 0; j--)
+                {
+                    if (ch[j] == opposite(rightBracket.peek()))
+                    {
+                        rightBracket.pop();
+                        break;
+                    }
                 }
             }
         }
 
-        return rightBracket.isEmpty() && leftBracket.isEmpty();
+        return rightBracket.isEmpty() & leftBracket.isEmpty();
     }
 
-    int check(char c) {
-        if (c == '{' || c == '[' || c == '(') {
+    /**
+     * A method to check if the bracket is a left or right bracket
+     * @param c the bracket
+     * @return 0 if it is a left bracket, 1 if it is a right bracket, -1 if it none.
+     */
+
+    int check(char c)
+    {
+        if (c == '{' || c == '[' || c == '(')
+        {
             return 0;
-        } else if (c == '}' || c == ']' || c == ')') {
+        } else if (c == '}' || c == ']' || c == ')')
+        {
             return 1;
         }
 
         return -1;
     }
 
-    public static void main(String[] args) {
+    /**
+     * A method that returns the opposing bracket for each bracket variant
+     * @param input the bracket you want the opposite of
+     * @return the opposite bracket
+     */
+
+    char opposite(char input)
+    {
+        switch (input)
+        {
+            case '{':
+                return '}';
+            case '[':
+                return ']';
+            case '(':
+                return ')';
+            case '}':
+                return '{';
+            case ']':
+                return '[';
+            case ')':
+                return '(';
+
+        }
+
+        return '0';
+    }
+
+    public static void main(String[] args)
+    {
         new Main();
     }
 }
