@@ -110,7 +110,6 @@ public class Main
                 return '[';
             case ')':
                 return '(';
-
         }
 
         return '0';
