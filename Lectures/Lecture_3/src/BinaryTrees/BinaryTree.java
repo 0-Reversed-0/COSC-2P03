@@ -1,4 +1,4 @@
-package DOMTrees;
+package BinaryTrees;
 
 public interface BinaryTree
 {
