@@ -72,6 +72,7 @@ public class BinaryTree<A>
     /*
      * Pre order
      */
+
     public void preorderTraversal(Consumer<A> action)
     {
         preorderTraverse(action, root);
