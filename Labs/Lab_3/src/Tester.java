@@ -1,11 +1,13 @@
 import Part_ABCDE.BinaryTree;
 
-public class Tester {
-    public static void main(String[] args) {
+public class Tester
+{
+    public static void main(String[] args)
+    {
         BinaryTree<Character> tree =
                 new BinaryTree<>('a',
-                new BinaryTree<>('b', new BinaryTree<>('d'), null),
-                new BinaryTree<>('c', new BinaryTree<>('e'), new BinaryTree<>('f', new BinaryTree<>('g'), null)));
+                        new BinaryTree<>('b', new BinaryTree<>('d'), null),
+                        new BinaryTree<>('c', new BinaryTree<>('e'), new BinaryTree<>('f', new BinaryTree<>('g'), null)));
 
 
         tree.bfTraversal(System.out::println);

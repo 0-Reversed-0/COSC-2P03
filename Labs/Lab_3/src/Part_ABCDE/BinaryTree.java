@@ -4,7 +4,8 @@ import java.util.LinkedList;
 import java.util.function.Consumer;
 import java.util.List;
 
-public class BinaryTree<A> {
+public class BinaryTree<A>
+{
 
     /**
      * Part A
@@ -15,7 +16,8 @@ public class BinaryTree<A> {
     BinaryTree<A> left;
     BinaryTree<A> right;
 
-    public BinaryTree(A item, BinaryTree<A> left, BinaryTree<A> right) {
+    public BinaryTree(A item, BinaryTree<A> left, BinaryTree<A> right)
+    {
         this.item = item;
         this.left = left;
         this.right = right;
@@ -23,7 +25,8 @@ public class BinaryTree<A> {
         root = this;
     }
 
-    public BinaryTree(A item) {
+    public BinaryTree(A item)
+    {
         this.item = item;
         left = null;
         right = null;
@@ -33,23 +36,29 @@ public class BinaryTree<A> {
      * Part B
      */
 
-    public void bfTraversal(Consumer<A> action) { //todo study this later
-        if (root == null) {
+    public void bfTraversal(Consumer<A> action)
+    { //todo study this later
+        if (root == null)
+        {
             return;
-        } else {
+        } else
+        {
             List<BinaryTree<A>> list = new LinkedList<BinaryTree<A>>();
 
             BinaryTree<A> current = root;
             list.add(root);
 
-            while (!list.isEmpty()) {
-                current = list.removeFirst();
+            while (!list.isEmpty())
+            {
+                current = list.remove(0);
                 action.accept(current.item);
 
-                if (current.left != null) {
+                if (current.left != null)
+                {
                     list.add(current.left);
                 }
-                if (current.right != null) {
+                if (current.right != null)
+                {
                     list.add(current.right);
                 }
             }
@@ -63,12 +72,15 @@ public class BinaryTree<A> {
     /*
      * Pre order
      */
-    public void preorderTraversal(Consumer<A> action) {
+    public void preorderTraversal(Consumer<A> action)
+    {
         preorderTraverse(action, root);
     }
 
-    private void preorderTraverse(Consumer<A> action, BinaryTree<A> current) {
-        if (current == null) {
+    private void preorderTraverse(Consumer<A> action, BinaryTree<A> current)
+    {
+        if (current == null)
+        {
             return;
         }
 
@@ -81,12 +93,15 @@ public class BinaryTree<A> {
      * In order
      */
 
-    public void inorderTraversal(Consumer<A> action) {
+    public void inorderTraversal(Consumer<A> action)
+    {
         inorderTraverse(action, root);
     }
 
-    private void inorderTraverse(Consumer<A> action, BinaryTree<A> current) {
-        if (current == null) {
+    private void inorderTraverse(Consumer<A> action, BinaryTree<A> current)
+    {
+        if (current == null)
+        {
             return;
         }
 
@@ -99,12 +114,15 @@ public class BinaryTree<A> {
      * Post order
      */
 
-    public void postorderTraversal(Consumer<A> action) {
+    public void postorderTraversal(Consumer<A> action)
+    {
         postorderTraverse(action, root);
     }
 
-    private void postorderTraverse(Consumer<A> action, BinaryTree<A> current) {
-        if (current == null) {
+    private void postorderTraverse(Consumer<A> action, BinaryTree<A> current)
+    {
+        if (current == null)
+        {
             return;
         }
 
@@ -118,13 +136,15 @@ public class BinaryTree<A> {
      * Part D
      */
 
-    public int height() {
+    public int height()
+    {
         return height(root);
     }
 
     private int height(BinaryTree<A> current)
     {
-        if (current == null) {
+        if (current == null)
+        {
             return -1; // cuz of the plus 1
         }
 
@@ -138,14 +158,18 @@ public class BinaryTree<A> {
      * Part E
      */
 
-    public boolean containsNode(A x) {
+    public boolean containsNode(A x)
+    {
         return contain(x, root);
     }
 
-    private boolean contain(A x, BinaryTree<A> current) {
-        if (current == null) {
+    private boolean contain(A x, BinaryTree<A> current)
+    {
+        if (current == null)
+        {
             return false;
-        } else if (current.item == x) {
+        } else if (current.item == x)
+        {
             return true;
         }
 
