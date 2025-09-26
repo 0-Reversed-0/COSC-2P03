@@ -1,78 +1,116 @@
 /**
- *
+ * TODO
  */
 
 @SuppressWarnings("unchecked")
-// This is used to suppress every unchecked exception warnings the IDE gives you. You could also put "all" in the parameters to suppress all warnings
+// This is used to suppress every unchecked exception warnings the IDE gives you. You could also put "all" in the parameters to suppress all warnings.
+
 public class ArrayList<E>
 {
-    private int size = 1;
-    private E[] array;
+
+    /**
+     * We use the count to check how many elements are within the ArrayList.
+     *
+     */
+
+    private int count = 0;
+
+    private E[] array; // Instead of using nodes we would instead use Linked lists
+
+    /**
+     * TODO
+     */
 
     public ArrayList()
     {
-        array = (E[]) new Object[size]; // You cannot directly make a parameterized object array without type casting due to type erasure
+        array = (E[]) new Object[10]; // 10 will be our default capacity and as we add more items to the list this number will grow
     }
 
+    /**
+     * Adds an element to the end of a list.
+     * This method would be O(1) because it's just accessing an index, but if its full it can be O(n).
+     *
+     * @param element the object you want to add to the list
+     */
+
     public void add(E element)
+{
+    if (isFull())
     {
-        if (isFull())
+        E[] newArray = (E[]) new Object[array.length + 1];
+
+        for (int i = 0; i < array.length; i++)
         {
-            size++;
-
-            E[] newArray = (E[]) new Object[size];
-
-            for (int i = 0; i < size - 2; i++)
+            if (array[i] != null)
             {
                 newArray[i] = array[i];
             }
-
-            array = newArray;
-            array[size - 1] = element;
         }
 
-        size++;
-        array[size - 1] = element;
+        array = newArray;
     }
+
+    count++;
+    array[count - 1] = element;
+}
+
+    /**
+     * @param index a zero based position number within the list.
+     * @return An element from the specified index.
+     * @throws IndexOutOfBoundsException if the list is empty or the index is greater than the count of the list.
+     */
 
     public E get(int index)
     {
         if (isEmpty())
         {
-            throw new RuntimeException("List is empty");
-        } else if (index >= size)
+            throw new IndexOutOfBoundsException("List is empty.");
+        } else if (index >= count)
         {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("Index is greater than the amount of elements.");
         }
 
         return array[index];
     }
 
+    /**
+     * @return gets the head's element without removing it.
+     * @throws IndexOutOfBoundsException if the list is empty.
+     */
+
     public E getHead()
     {
         if (isEmpty())
         {
-            throw new RuntimeException("Lust is empty");
+            throw new IndexOutOfBoundsException("List is empty");
         }
 
         return array[0];
     }
 
+    /**
+     * Remove any element from the list.
+     *
+     * @param index a zero based position number within the list.
+     * @return an element at the specified location.
+     * @throws IndexOutOfBoundsException if the list is empty.
+     */
+
     public E remove(int index)
     {
         if (isEmpty())
         {
-            throw new RuntimeException("List is empty");
-        } else if (index >= size)
+            throw new IndexOutOfBoundsException("List is empty");
+        } else if (index >= count)
         {
             throw new IndexOutOfBoundsException();
         }
 
         E value = array[index];
         array[index] = null;
-        size--;
+        count--;
 
-        E[] newArray = (E[]) new Object[size];
+        E[] newArray = (E[]) new Object[count];
         for (int i = 0; i < array.length; i++)
         {
             if (array[i] != null)
@@ -86,19 +124,27 @@ public class ArrayList<E>
         return value;
     }
 
+    /**
+     * Removes the head.
+     *
+     * @return gets the element of the head.
+     * @throws IndexOutOfBoundsException if the list is empty.
+     */
+
     public E removeHead()
     {
         if (isEmpty())
         {
-            throw new RuntimeException("List is empty");
+            throw new IndexOutOfBoundsException("List is empty");
         }
 
         E value = array[0];
         array[0] = null;
-        size--;
+        count--;
 
-        E[] newArray = (E[]) new Object[size];
-        for (int i = 1; i < array.length; i++)
+        E[] newArray = (E[]) new Object[count];
+
+        for (int i = 0; i < count; i++)
         {
             newArray[i] = array[i];
         }
@@ -108,13 +154,35 @@ public class ArrayList<E>
         return value;
     }
 
-    public boolean isEmpty()
+    /**
+     * @return the amount of elements in the list.
+     */
+
+    public int size()
     {
-        return size == 0;
+        return count;
     }
 
-    public boolean isFull()
+    /**
+     * Checks if the list is empty.
+     *
+     * @return true if it is empty and false if it's not empty.
+     */
+
+    public boolean isEmpty()
     {
-        return size == array.length;
+        return count == 0;
+    }
+
+    /**
+     * This is just a helper method, Helper methods are just methods used to help the inner workings of the class but are not methods users access.
+     * Helps us determine if the array is count.
+     *
+     * @return false if it is not full and true if it is full.
+     */
+
+    private boolean isFull()
+    {
+        return count == array.length;
     }
 }
