@@ -10,13 +10,14 @@ public class Tester
                         new BinaryTree<>('c', new BinaryTree<>('e'), new BinaryTree<>('f', new BinaryTree<>('g'), null)));
 
 
-        tree.bfTraversal(System.out::println);
+        tree.bfTraversal(System.out::print);
+        System.out.println();
         tree.preorderTraversal(System.out::print);
         System.out.println();
         tree.inorderTraversal(System.out::print);
         System.out.println();
         tree.postorderTraversal(System.out::print);
         System.out.println("\n" + tree.containsNode('g'));
-        System.out.println("\n" + tree.height());
+        System.out.println(tree.height());
     }
 }
